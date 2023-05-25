@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.2</version>
+    <date>2023-05-24T13:20:35Z</date>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>2cc062839a404885bd66893387f931ac</uuid>
+            <template>Template Repka Pi</template>
+            <name>Template Repka Pi</name>
+            <description>Template for a Repka Pi to monitor parameters</description>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>7206529ab1824eb5b47d1d0536d28b8c</uuid>
+                    <name>RepkaTCPUCrit</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>repkapi_t.sh[cpucrit]</key>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.cpu_thermal_virtual_0.temp1.temp1_crit</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <uuid>e165af2213944f40b2bd4b91364bf8a2</uuid>
+                    <name>RepkaTCPU</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>repkapi_t.sh[cpu]</key>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.cpu_thermal_virtual_0.temp1.temp1_input</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <uuid>caa9aadc7f9d48b7a6c404e8dca55040</uuid>
+                            <expression>last(/Template Repka Pi/repkapi_t.sh[cpu])&gt;=65</expression>
+                            <name>Repka CPU Overheating &gt;=65</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>c78862bb899e4b629419473d4969e8d4</uuid>
+                    <name>RepkaTGPU</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>repkapi_t.sh[gpu]</key>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.gpu_thermal_virtual_0.temp1.temp1_input</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <uuid>426e5dc4942148b5ad3dcac834a7c2b1</uuid>
+                            <expression>last(/Template Repka Pi/repkapi_t.sh[gpu])&gt;=80</expression>
+                            <name>Repka GPU Overheating &gt;= 80 degrees</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <uuid>b5de81aa3e344ceea08a6c4a7e154522</uuid>
+            <expression>last(/Template Repka Pi/repkapi_t.sh[cpu])&gt;=last(/Template Repka Pi/repkapi_t.sh[cpucrit])</expression>
+            <name>Repka CPU Critical Overheating</name>
+            <priority>HIGH</priority>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <uuid>d61f1711c97344658b3dc8fc5df48742</uuid>
+            <name>Repka CPU Temperature</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Repka Pi</host>
+                        <key>repkapi_t.sh[cpu]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>274482</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Repka Pi</host>
+                        <key>repkapi_t.sh[cpucrit]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>d33d91203ac14072b1b0c87aa10c039b</uuid>
+            <name>Repka GPU Temperature</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Repka Pi</host>
+                        <key>repkapi_t.sh[gpu]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
