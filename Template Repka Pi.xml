@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>6.2</version>
-    <date>2023-05-24T13:20:35Z</date>
+    <date>2023-05-27T12:35:08Z</date>
     <template_groups>
         <template_group>
             <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
@@ -20,6 +20,30 @@
                 </group>
             </groups>
             <items>
+                <item>
+                    <uuid>bf5154e34ecd463fb0ffa0c5eec5ae26</uuid>
+                    <name>RepkaFCPU-0</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu0]</key>
+                </item>
+                <item>
+                    <uuid>e20a0b566a1c4c63b50df186dcdc8b42</uuid>
+                    <name>RepkaFCPU-1</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu1]</key>
+                </item>
+                <item>
+                    <uuid>ebd361ac6e494ac3af39ef5ca6b66a5e</uuid>
+                    <name>RepkaFCPU-2</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu2]</key>
+                </item>
+                <item>
+                    <uuid>23e43f30fd7c44418b88f2f924496179</uuid>
+                    <name>RepkaFCPU-3</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu3]</key>
+                </item>
                 <item>
                     <uuid>7206529ab1824eb5b47d1d0536d28b8c</uuid>
                     <name>RepkaTCPUCrit</name>
@@ -93,6 +117,47 @@
         </trigger>
     </triggers>
     <graphs>
+        <graph>
+            <uuid>86ba7a25088746509a3a665ae47e5275</uuid>
+            <name>Repka CPU Frequency</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Repka Pi</host>
+                        <key>cpufreq[cpu0]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>274482</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Repka Pi</host>
+                        <key>cpufreq[cpu1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Repka Pi</host>
+                        <key>cpufreq[cpu2]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>2774A4</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Repka Pi</host>
+                        <key>cpufreq[cpu3]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
         <graph>
             <uuid>d61f1711c97344658b3dc8fc5df48742</uuid>
             <name>Repka CPU Temperature</name>
